@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { HAX_EXAMPLE_INPUT } from '../app/examples';
 import { convertHaxToMomentum } from '../domain/import/hax/convertHaxToMomentum';
 import { parseHaxWorkshop } from '../domain/import/hax/parseHaxWorkshop';
 import { renderMomentumWorkshop } from '../domain/render/renderMomentumWorkshop';
@@ -138,8 +137,7 @@ describe('renderMomentumWorkshop', () => {
   });
 
   it('keeps the sample conversion output stable at the top of the file', () => {
-    const sample = readFileSync(join(process.cwd(), 'Hax Framework - Example Map Data.txt'), 'utf8');
-    const parsed = parseHaxWorkshop(sample);
+    const parsed = parseHaxWorkshop(HAX_EXAMPLE_INPUT);
     const result = convertHaxToMomentum(parsed);
     const preview = result.outputText.split('\n').slice(0, VARIABLE_BLOCK.split('\n').length).join('\n');
 

@@ -9,10 +9,10 @@ This repo is a browser-based Hax Framework to Project Momentum converter/editor.
 Treat these files as domain references:
 
 - `Hax Framework - Effects.md`
-- `Hax Framework - Checkpoint Prime Number Switches.txt`
-- `Hax Framework - Example Map Data.txt`
-- `Project Momentum - Example Map Data.txt`
-- `Colors in Workshop.txt`
+- `Hax Framework - Missions.md`
+- `docs/hax-prime-switches.md`
+- `docs/examples.md`
+- `docs/workshop-colors.md`
 
 Do not casually "clean up" or reinterpret code semantics without checking these files first.
 
@@ -23,6 +23,7 @@ Do not casually "clean up" or reinterpret code semantics without checking these 
 ## Core Code Files
 
 - `src/app/App.tsx`: top-level composition
+- `src/app/examples.ts`: bundled clean Hax and Momentum example inputs
 - `src/app/useWorkspaceSession.ts`: workspace session state and import transitions
 - `src/domain/import/hax/parseHaxWorkshop.ts`: parses Hax Workshop source into `HaxSourceData`
 - `src/domain/import/hax/convertHaxToMomentum.ts`: converts parsed Hax data into the editable PM model and import warnings

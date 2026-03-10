@@ -22,9 +22,9 @@ This is the primary navigation entrypoint for maintainers and AI agents.
 4. Domain-specific docs (`conversion-rules`, `rendering-rules`, `domain-model`, `ui-workspace`)
 5. Hax source-of-truth docs:
    - `Hax Framework - Effects.md`
-   - `Hax Framework - Checkpoint Prime Number Switches.txt`
+   - `docs/hax-prime-switches.md`
    - `Hax Framework - Missions.md`
-   - `Hax Framework - Example Map Data.txt`
+   - `docs/examples.md`
 
 ## Edit This When
 

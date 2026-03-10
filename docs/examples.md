@@ -2,10 +2,10 @@
 
 ## Source References
 
-Use the existing root files as the canonical example inputs:
+Use the bundled example constants in `src/app/examples.ts` as the canonical example inputs:
 
-- `Hax Framework - Example Map Data.txt`
-- `Project Momentum - Example Map Data.txt`
+- `HAX_EXAMPLE_INPUT`
+- `MOMENTUM_EXAMPLE_INPUT`
 
 ## Representative Scenarios
 

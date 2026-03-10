@@ -43,13 +43,13 @@ npm run build
 
 ## Important Domain References
 
-These root-level reference files are part of the project's domain truth and should be treated as input documentation, not incidental notes:
+These reference docs are part of the project's domain truth and should be treated as input documentation, not incidental notes:
 
 - `Hax Framework - Effects.md`
-- `Hax Framework - Checkpoint Prime Number Switches.txt`
-- `Hax Framework - Example Map Data.txt`
-- `Project Momentum - Example Map Data.txt`
-- `Colors in Workshop.txt`
+- `Hax Framework - Missions.md`
+- `docs/hax-prime-switches.md`
+- `docs/examples.md`
+- `docs/workshop-colors.md`
 
 ## Deeper Docs
 

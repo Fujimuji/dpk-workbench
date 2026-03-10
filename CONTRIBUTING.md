@@ -37,9 +37,9 @@ Update documentation if you change:
 - workspace interaction rules
 - intentional limitations
 
-## Root Reference Files
+## Reference Files
 
-The root `.txt` / `.md` reference files are part of the domain truth. Do not treat them as disposable examples.
+The checked-in reference docs and bundled example constants are part of the domain truth. Do not treat them as disposable examples.
 
 ## Commit Hygiene
 
