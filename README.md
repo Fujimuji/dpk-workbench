@@ -1,49 +1,55 @@
-# Parkour Data Converter
+# DPK Workbench
 
-Browser-based Hax Framework and Project Momentum Workshop importer/editor. The app accepts either Hax or Project Momentum Workshop source, imports it into an editable Project Momentum map model, lets the user adjust the imported structure in a freeform canvas-based node workspace, and generates a ready-to-paste Workshop block.
+Browser-based Doomfist Parkour workbench for importing, editing, converting, and exporting both Hax Framework and Project Momentum Workshop map data.
 
-## Current Features
+## What It Does
 
-- Import Hax or Project Momentum data from pasted Workshop source
-- Convert Hax checkpoints/effects into an editable Project Momentum map model
-- Edit the imported map through a draggable canvas-based node editor
-- Generate Project Momentum Workshop output live
-- Copy the current output from the Output overlay
+DPK Workbench is for map makers and players who want to work with Doomfist Parkour map data without digging through raw Workshop arrays by hand.
 
-## Tech Stack
+With it, you can:
 
-- Vite
-- React
-- TypeScript
-- Vitest
-- `lucide-react`
+- load Hax Framework or Project Momentum Workshop source
+- inspect the map in a visual node-based workspace
+- edit levels, checkpoints, entities, effects, and missions
+- convert Hax maps into Project Momentum format
+- export Workshop-ready output
 
-## Local Commands
+## Main Features
+
+- Clean bundled Hax and Momentum examples
+- Visual map editing with scoped navigation
+- Hax and Momentum support in the same tool
+- Guided in-app onboarding for the editor workflow
+- Draft validation before Output or conversion
+- Copy-ready Workshop output
+
+## Typical Workflow
+
+1. Open a Hax or Momentum map, or load an example.
+2. Navigate through Spawn View, levels, and checkpoints.
+3. Edit checkpoints, entities, effects, or missions.
+4. Open Output to copy Workshop data.
+5. If you started with Hax, optionally convert it to Momentum first.
+
+## Run Locally
 
 ```bash
 npm install
 npm run dev
+```
+
+Then open the local Vite URL in your browser.
+
+## Build and Test
+
+```bash
 npm test
 npm run build
 ```
 
-## Start Here
+## Reference Docs
 
-- Read `docs/index.md` first for the current ownership map and change playbooks
-- Read `AGENTS.md` for repo-specific rules
-
-## Folder Map
-
-- `src/app`: top-level orchestration and workspace session state
-- `src/domain`: canonical model, import, and render layers
-- `src/features/workspace`: workspace types, graph helpers, and new feature entrypoints
-- `src/shared`: low-level reusable utilities
-- `src/styles`: stylesheet entrypoint and split CSS files for the workspace shell, canvas, and node editor
-- `src/test`: test suite
-
-## Important Domain References
-
-These reference docs are part of the project's domain truth and should be treated as input documentation, not incidental notes:
+These files document the Workshop rules and reference material the app is built around:
 
 - `Hax Framework - Effects.md`
 - `Hax Framework - Missions.md`
@@ -51,9 +57,6 @@ These reference docs are part of the project's domain truth and should be treate
 - `docs/examples.md`
 - `docs/workshop-colors.md`
 
-## Deeper Docs
+## Dev Notes
 
-- Read `docs/index.md` for navigation
-- Read `docs/conversion-rules.md` before changing converter logic
-- Read `docs/rendering-rules.md` before changing Workshop output shape
-- Read `docs/ui-workspace.md` before changing the canvas editor or shell interactions
+If you are changing the app itself, start with `docs/index.md`.
