@@ -1,0 +1,109 @@
+.canvas-node-entity-group {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-empty);
+}
+
+.canvas-node-entity-group + .canvas-node-entity-group {
+  margin-top: 10px;
+}
+
+.canvas-node-entity-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.canvas-node-entity-group-head > span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.entity-node-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.entity-node-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-panel);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.entity-node-chip:hover {
+  background: var(--surface-panel-hover);
+}
+
+.entity-node-chip span:last-child {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+}
+
+
+.entity-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.entity-card {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--outline-row-border);
+  background: var(--surface-panel);
+}
+
+.entity-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-action-button {
+  color: currentColor;
+}
+
+.section-action-button .button-icon {
+  color: currentColor;
+}
+
+.section-action-button.is-touch {
+  border-color: var(--tone-touch-border);
+  background: var(--tone-touch-bg);
+  color: var(--tone-touch-text);
+}
+
+.section-action-button.is-ability {
+  border-color: var(--tone-ability-border);
+  background: var(--tone-ability-bg);
+  color: var(--tone-ability-text);
+}
+
+.section-action-button.is-lava {
+  border-color: var(--tone-lava-border);
+  background: var(--tone-lava-bg);
+  color: var(--tone-lava-text);
+}
+
+.section-action-button.is-bot {
+  border-color: var(--tone-bot-border);
+  background: var(--tone-bot-bg);
+  color: var(--tone-bot-text);
+}
+

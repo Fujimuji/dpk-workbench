@@ -1,0 +1,938 @@
+.canvas-node-editor {
+  position: absolute;
+  pointer-events: auto;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 34%, var(--border-default));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 58%, var(--surface-floating-strong)) 0%, var(--surface-floating-strong) 54%),
+    var(--surface-floating-strong);
+  box-shadow: var(--shadow-overlay);
+}
+
+.canvas-node-editor-shell {
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+.canvas-node-editor-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 18%, var(--border-subtle));
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 88%, transparent) 0%,
+      transparent 72%
+    );
+  cursor: move;
+}
+
+.canvas-node-editor.is-portal-pair {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-floating-strong) 88%, white) 0%, var(--surface-floating-strong) 58%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 92%, var(--surface-floating-strong)) 0%,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 76%, var(--surface-floating-strong)) 34%,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 58%, var(--surface-floating-strong)) 47%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 58%,
+        var(--surface-floating-strong)
+      ) 53%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 76%,
+        var(--surface-floating-strong)
+      ) 66%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 92%,
+        var(--surface-floating-strong)
+      ) 100%
+    ),
+    var(--surface-floating-strong);
+}
+
+.canvas-node-editor.is-portal-pair .canvas-node-editor-head {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 96%, var(--surface-floating-strong)) 0%,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 78%, var(--surface-floating-strong)) 34%,
+      color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 60%, var(--surface-floating-strong)) 47%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 60%,
+        var(--surface-floating-strong)
+      ) 53%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 78%,
+        var(--surface-floating-strong)
+      ) 66%,
+      color-mix(
+        in srgb,
+        var(--panel-accent-alt-soft, var(--panel-accent-soft, var(--accent-default-soft))) 52%,
+        var(--surface-floating-strong)
+      ) 100%
+    );
+}
+
+.canvas-node-editor-head.is-static {
+  cursor: default;
+}
+
+.canvas-node-editor-head h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 42%, var(--text-strong));
+}
+
+.canvas-node-editor-head-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.canvas-node-editor-head-tools .button.button-mini {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.canvas-node-editor-body {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.canvas-node-editor-context {
+  margin: 4px 0 0;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 28%, var(--text-secondary));
+  font-size: 0.82rem;
+}
+
+.canvas-node-editor .eyebrow {
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 36%, var(--text-muted));
+}
+
+.canvas-node-editor .button-icon {
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 54%, currentColor);
+}
+
+.canvas-node-editor-section {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 14%, var(--border-default));
+  background: color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 18%, var(--surface-empty));
+}
+
+.canvas-node-editor-section > h3 {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 30%, var(--text-secondary));
+}
+
+.canvas-node-editor-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.canvas-node-editor-section.is-collapsed .canvas-node-editor-section-toggle {
+  margin-bottom: 0;
+}
+
+.canvas-node-editor-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 30%, var(--text-secondary));
+}
+
+.canvas-node-editor-section-toggle-icon {
+  flex: none;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 42%, var(--text-muted));
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.canvas-node-editor-section-toggle-icon.is-collapsed {
+  transform: rotate(-90deg);
+}
+
+.canvas-node-editor-section-toggle:hover .canvas-node-editor-section-title,
+.canvas-node-editor-section-toggle:hover .canvas-node-editor-section-toggle-icon {
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 48%, var(--text-strong));
+}
+
+.canvas-node-editor-section-toggle:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 42%, var(--surface-tab-active));
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.canvas-node-editor-section.is-portal-entry {
+  --panel-accent: #ff9f43;
+  --panel-accent-soft: rgba(255, 159, 67, 0.18);
+  border-color: color-mix(in srgb, #ff9f43 26%, var(--border-default));
+  background: color-mix(in srgb, rgba(255, 159, 67, 0.16) 64%, var(--surface-empty));
+}
+
+.canvas-node-editor-section.is-portal-entry > h3 {
+  color: color-mix(in srgb, #ff9f43 54%, var(--text-secondary));
+}
+
+.canvas-node-editor-section.is-portal-exit {
+  --panel-accent: #7ddcff;
+  --panel-accent-soft: rgba(125, 220, 255, 0.18);
+  border-color: color-mix(in srgb, #7ddcff 26%, var(--border-default));
+  background: color-mix(in srgb, rgba(125, 220, 255, 0.16) 64%, var(--surface-empty));
+}
+
+.canvas-node-editor-section.is-portal-exit > h3 {
+  color: color-mix(in srgb, #7ddcff 52%, var(--text-secondary));
+}
+
+.canvas-node-editor-section.is-flash,
+.canvas-node-entity-group.is-flash {
+  animation: inspector-section-flash 900ms ease;
+}
+
+.canvas-node-editor-section-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.canvas-node-editor-section-grid.is-two-column {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.canvas-node-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.canvas-node-editor-actions.is-end {
+  justify-content: flex-end;
+}
+
+.canvas-node-editor-actions.is-stretch > .button {
+  flex: 1 1 100%;
+  justify-content: center;
+}
+
+.canvas-node-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.canvas-node-action-card {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 18%, var(--border-default));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 18%, var(--surface-panel));
+  color: var(--text-strong);
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.canvas-node-action-card:hover,
+.canvas-node-action-card:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 34%, var(--border-accent));
+  background: color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 26%, var(--surface-panel-active));
+}
+
+.canvas-node-action-card:active {
+  transform: translateY(1px);
+}
+
+.canvas-node-action-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+  transform: none;
+}
+
+.canvas-node-action-card-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 54%, var(--text-strong));
+}
+
+.canvas-node-action-card-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.canvas-node-action-card.is-accent-haxTime {
+  --panel-accent: #7ddcff;
+  --panel-accent-soft: rgba(125, 220, 255, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxDeath {
+  --panel-accent: #ff6b6b;
+  --panel-accent-soft: rgba(255, 107, 107, 0.18);
+}
+
+.canvas-node-action-card.is-accent-ability {
+  --panel-accent: #dde8f4;
+  --panel-accent-soft: rgba(221, 232, 244, 0.18);
+}
+
+.canvas-node-action-card.is-accent-touch {
+  --panel-accent: #7ee0ff;
+  --panel-accent-soft: rgba(126, 224, 255, 0.18);
+}
+
+.canvas-node-action-card.is-accent-lava {
+  --panel-accent: #ff8a5b;
+  --panel-accent-soft: rgba(255, 138, 91, 0.18);
+}
+
+.canvas-node-action-card.is-accent-bot {
+  --panel-accent: #4ed7c5;
+  --panel-accent-soft: rgba(78, 215, 197, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxPermeation {
+  --panel-accent: #9dff57;
+  --panel-accent-soft: rgba(157, 255, 87, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxCheckpoint {
+  --panel-accent: #ffb347;
+  --panel-accent-soft: rgba(255, 179, 71, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxPortal {
+  --panel-accent: #ff9f43;
+  --panel-accent-soft: rgba(255, 159, 67, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxZipline {
+  --panel-accent: #4d8dff;
+  --panel-accent-soft: rgba(77, 141, 255, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxBlackhole {
+  --panel-accent: #8f97a5;
+  --panel-accent-soft: rgba(143, 151, 165, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxShootableOrb {
+  --panel-accent: #3fe0d0;
+  --panel-accent-soft: rgba(63, 224, 208, 0.18);
+}
+
+.canvas-node-action-card.is-accent-haxBounce {
+  --panel-accent: #f5a45a;
+  --panel-accent-soft: rgba(245, 164, 90, 0.18);
+}
+
+.canvas-node-editor-danger-action {
+  border-color: color-mix(in srgb, var(--state-error-border) 72%, var(--button-ghost-border));
+  background: color-mix(in srgb, var(--state-error-bg) 72%, var(--button-ghost-bg));
+  color: var(--state-error-text);
+}
+
+.canvas-node-editor-danger-action:hover,
+.canvas-node-editor-danger-action:focus-visible {
+  outline: none;
+  filter: none;
+  border-color: var(--state-error-border);
+  background: color-mix(in srgb, var(--state-error-bg) 82%, var(--button-ghost-bg));
+  color: var(--state-error-text);
+}
+
+.segmented-control {
+  --segmented-count: 2;
+  --segmented-index: 0;
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(var(--segmented-count), minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-panel);
+  overflow: hidden;
+}
+
+.segmented-control-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px - ((var(--segmented-count) - 1) * 6px)) / var(--segmented-count));
+  border: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 68%, var(--border-accent));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 74%, var(--surface-tab-active));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 58%, transparent);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+  transform: translateX(calc(var(--segmented-index) * (100% + 6px)));
+}
+
+.segmented-control.is-time {
+  --segmented-index: 1;
+}
+
+.segmented-control-button {
+  position: relative;
+  z-index: 1;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.segmented-control-button:hover {
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 18%, var(--text-strong));
+}
+
+.segmented-control-button.is-active {
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 28%, var(--text-strong));
+}
+
+.segmented-control-button:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 52%, var(--surface-tab-active));
+  outline-offset: 2px;
+}
+
+.canvas-node-field-group {
+  display: grid;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .canvas-node-editor-section-grid.is-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-node-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.editor-edge {
+  fill: none;
+  stroke: var(--graph-edge);
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.editor-edge.level-branch {
+  stroke-opacity: 0.74;
+}
+
+.editor-edge.is-dimmed {
+  opacity: 0.24;
+}
+
+.editor-node-group {
+  cursor: pointer;
+}
+
+.editor-node-group.is-dimmed {
+  opacity: 0.42;
+}
+
+.editor-node-shell {
+  fill: var(--graph-node-base-fill);
+  stroke: var(--graph-node-base-stroke);
+  stroke-width: 1.25;
+  filter: var(--shadow-node);
+  transition:
+    fill 140ms ease,
+    stroke 140ms ease,
+    filter 140ms ease;
+}
+
+.editor-node-group.level .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent-soft) 26%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 40%, var(--graph-node-base-stroke));
+  stroke-width: 1.35;
+}
+
+.editor-node-group.checkpoint .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent-soft) 18%, var(--graph-node-base-fill-strong));
+  stroke: color-mix(in srgb, var(--node-accent) 28%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.touchOrb .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 32%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.abilityOrb .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 32%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.lavaOrb .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 32%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.bot .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 32%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.haxEffect .editor-node-shell,
+.editor-node-group.haxEffectPair .editor-node-shell,
+.editor-node-group.haxEffects .editor-node-shell,
+.editor-node-group.haxMissions .editor-node-shell,
+.editor-node-group.haxMission .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 32%, var(--graph-node-base-stroke));
+}
+
+.editor-node-group.touchStack .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 15%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 30%, var(--graph-node-base-stroke));
+  stroke-width: 1.35;
+  filter:
+    drop-shadow(3px 0 0 var(--shadow-node-stack-offset))
+    var(--shadow-node);
+}
+
+.editor-node-group.abilityStack .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 15%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 30%, var(--graph-node-base-stroke));
+  stroke-width: 1.35;
+  filter:
+    drop-shadow(3px 0 0 var(--shadow-node-stack-offset))
+    var(--shadow-node);
+}
+
+.editor-node-group.lavaStack .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 15%, var(--graph-node-base-fill));
+  stroke: color-mix(in srgb, var(--node-accent) 30%, var(--graph-node-base-stroke));
+  stroke-width: 1.35;
+  filter:
+    drop-shadow(3px 0 0 var(--shadow-node-stack-offset))
+    var(--shadow-node);
+}
+
+.editor-node-group.is-selected .editor-node-shell {
+  stroke: var(--node-accent);
+  stroke-width: 1.6;
+  filter: drop-shadow(0 0 7px var(--node-accent-soft));
+}
+
+.editor-node-group.is-multi-selected .editor-node-shell {
+  stroke: color-mix(in srgb, var(--node-accent) 64%, var(--graph-count-chip-text));
+  stroke-width: 1.45;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--node-accent-soft) 64%, var(--surface-tab-active)));
+}
+
+.editor-node-group:hover .editor-node-shell {
+  fill: color-mix(in srgb, var(--node-accent) 14%, var(--graph-node-hover-fill));
+}
+
+.editor-node-count-chip {
+  fill: color-mix(in srgb, var(--node-accent) 28%, var(--graph-count-chip-base));
+  stroke: color-mix(in srgb, var(--node-accent) 52%, var(--graph-count-chip-stroke));
+  stroke-width: 1;
+}
+
+.editor-node-count-chip-text {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-count-chip-text));
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+
+.editor-node-group.is-selected .editor-node-count-chip,
+.editor-node-group.is-multi-selected .editor-node-count-chip {
+  stroke: color-mix(in srgb, var(--node-accent) 74%, var(--graph-count-chip-text));
+}
+
+.editor-node-title,
+.editor-node-subtitle {
+  pointer-events: none;
+  dominant-baseline: middle;
+}
+
+.editor-node-title {
+  fill: var(--graph-node-title);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.editor-node-group.level .editor-node-title,
+.editor-node-group.checkpoint .editor-node-title {
+  fill: color-mix(in srgb, var(--node-accent) 16%, var(--graph-node-title));
+}
+
+.editor-node-subtitle {
+  fill: var(--graph-node-subtitle);
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.editor-node-group.level .editor-node-subtitle,
+.editor-node-group.checkpoint .editor-node-subtitle {
+  fill: color-mix(in srgb, var(--node-accent) 18%, var(--graph-node-subtitle));
+}
+
+.editor-node-note-marker {
+  fill: var(--graph-note-marker);
+  stroke: var(--graph-note-marker-border);
+  stroke-width: 1;
+  transition:
+    transform 140ms ease,
+    fill 140ms ease;
+}
+
+.editor-node-group:hover .editor-node-note-marker {
+  fill: var(--graph-note-marker-hover);
+}
+
+.editor-node-socket-rail {
+  pointer-events: none;
+}
+
+.editor-node-socket {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.editor-node-socket-pill {
+  fill: var(--graph-socket-bg);
+  stroke: var(--graph-socket-stroke);
+  stroke-width: 1.1;
+  transition:
+    fill 140ms ease,
+    stroke 140ms ease;
+}
+
+.editor-node-socket-icon {
+  color: var(--graph-socket-text);
+  fill: none;
+  stroke: currentColor;
+  pointer-events: none;
+}
+
+.editor-node-socket-label {
+  fill: var(--graph-socket-text);
+  font-size: 0.52rem;
+  font-weight: 700;
+  text-anchor: start;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.editor-node-socket:hover .editor-node-socket-pill {
+  fill: var(--graph-socket-hover-bg);
+  stroke: var(--node-accent);
+}
+
+.editor-node-socket.touch .editor-node-socket-pill {
+  fill: color-mix(in srgb, var(--graph-socket-bg) 76%, var(--accent-touch-soft));
+  stroke: color-mix(in srgb, var(--graph-socket-stroke) 72%, var(--accent-touch));
+}
+
+.editor-node-socket.ability .editor-node-socket-pill {
+  fill: color-mix(in srgb, var(--graph-socket-bg) 76%, var(--accent-ability-soft));
+  stroke: color-mix(in srgb, var(--graph-socket-stroke) 72%, var(--accent-ability));
+}
+
+.editor-node-socket.lava .editor-node-socket-pill {
+  fill: color-mix(in srgb, var(--graph-socket-bg) 76%, var(--accent-lava-soft));
+  stroke: color-mix(in srgb, var(--graph-socket-stroke) 72%, var(--accent-lava));
+}
+
+.editor-node-socket.bot .editor-node-socket-pill {
+  fill: color-mix(in srgb, var(--graph-socket-bg) 76%, var(--accent-bot-soft));
+  stroke: color-mix(in srgb, var(--graph-socket-stroke) 72%, var(--accent-bot));
+}
+
+.canvas-node-editor-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px 0;
+}
+
+.canvas-node-editor-inline-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.canvas-node-tab {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: var(--surface-panel);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.canvas-node-tab.is-active {
+  border-color: transparent;
+  color: color-mix(in srgb, var(--panel-accent, var(--accent-default)) 24%, var(--text-strong));
+}
+
+.canvas-node-tab-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--panel-accent, var(--accent-default)) 70%, var(--border-accent));
+  background: color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 75%, var(--surface-panel-active));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--panel-accent-soft, var(--accent-default-soft)) 52%, transparent);
+}
+
+.canvas-node-tab-label {
+  position: relative;
+  z-index: 1;
+}
+
+
+.canvas-node-editor-compact {
+  overflow: hidden;
+}
+
+.canvas-node-editor-scroll {
+  display: grid;
+  gap: 10px;
+  overflow: visible;
+}
+
+.workspace-node-inspector.canvas-node-editor {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  box-shadow: none;
+}
+
+.canvas-node-editor-section-body {
+  transform-origin: top;
+}
+
+.canvas-node-editor-body {
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas-node-editor-body-panel {
+  display: grid;
+  gap: 12px;
+}
+
+
+.workspace-statusbar {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface-panel-strong);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.workspace-status-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.workspace-status-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--surface-badge);
+  border: 1px solid var(--outline-row-border);
+  white-space: nowrap;
+}
+
+.workspace-status-item.is-live {
+  color: var(--state-info-text);
+  border-color: var(--state-info-border);
+  background: var(--state-info-bg);
+}
+
+.workspace-status-right {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  color: var(--text-secondary);
+}
+
+.workspace-status-right.is-live {
+  color: var(--state-info-text);
+}
+
+.workspace-status-right.is-error {
+  color: var(--state-error-text);
+}
+
+@media (max-width: 1440px) {
+  .workspace-main-compact {
+    grid-template-columns: minmax(0, var(--inspector-width, 520px)) 12px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1280px) {
+  body {
+    overflow: auto;
+  }
+
+  .workspace-shell {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .workspace-canvas-stage.is-canvas-layout {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .workspace-main-compact {
+    grid-template-columns: minmax(0, var(--inspector-width, 520px)) 12px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .workspace-center {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 960px) {
+  .workspace-titlebar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-title-cluster {
+    gap: 8px;
+  }
+
+  .workspace-title-route {
+    padding: 0;
+    flex-wrap: wrap;
+    font-size: 0.98rem;
+  }
+
+  .workspace-topbar-actions {
+    justify-content: flex-start;
+  }
+
+  .workspace-main {
+    grid-template-columns: 1fr;
+  }
+
+  .stack-grid,
+  .vector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-main-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-resizer {
+    display: none;
+  }
+
+  .workspace-center {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 640px) {
+  .workspace-shell {
+    width: 100%;
+    padding: 0;
+  }
+
+  .workspace-topbar,
+  .workspace-panel {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .workspace-panel-header,
+  .entity-card-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-topbar-actions,
+  .map-toolbar,
+  .workspace-statusbar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-status-right {
+    text-align: left;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

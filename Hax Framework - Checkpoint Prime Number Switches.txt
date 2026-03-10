@@ -1,0 +1,14 @@
+Prime Number Switches
+
+2: Rocket Punch Disabled
+3: Powerblock Disabled
+5: Seismic Slam Disabled
+7: Centerless CP upon completion (not needed for Project Momentum)
+11: Multilevel Level Select (MEANS MAP SPAWN)
+13: First CP of a Level in a Multilevel (MEANS LEVEL ENTRANCE)
+17: Effect Lock Connection 1 (not needed for Project Momentum)
+19: Effect Lock Connection 2 (not needed for Project Momentum)
+23: Effect Lock Connection 3 (not needed for Project Momentum)
+29: Effect CPs Required (not needed for Project Momentum)
+
+FOR HAX Framework we don't need after 17. Rest are obsolete.
