@@ -16,7 +16,7 @@ export function checkpointConfig(overrides: Partial<CheckpointConfig> = {}): Che
     lava: null,
     bot: null,
     impulses: null,
-    portals: null,
+    portal: null,
     ...overrides
   };
 }

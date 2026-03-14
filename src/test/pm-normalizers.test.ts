@@ -20,7 +20,7 @@ describe('PM import normalizers', () => {
       lava: null,
       bot: null,
       impulses: null,
-      portals: null
+      portal: null
     });
   });
 

@@ -57,7 +57,7 @@ Never render `False` for non-liquid slots.
 
 ### `c_checkpointTimeLimits`
 ### `c_checkpointMinimumSpeeds`
-### `c_checkpointHeightGoals`
+### `c_heightGoals`
 
 - whole level `Null` if unused
 - otherwise per-slot:
@@ -86,8 +86,8 @@ Impulse direction and speed arrays may render either flat or grouped-by-position
 ## Portal Rules
 
 - `c_checkpointPortals` is aligned to `checkpointConfigs`
-- each populated slot renders as `Array(Array(entry, exit), ...)`
-- whole level `Null` if no checkpoint uses portals
+- each populated slot renders as `Array(entry, exit)`
+- whole level `Null` if no checkpoint uses a portal
 
 ## Checkpoint Size Rules
 
@@ -99,7 +99,7 @@ Impulse direction and speed arrays may render either flat or grouped-by-position
 
 Bots are single-value per checkpoint slot:
 
-- `c_checkpointBotLocation`
+- `c_botLocation`
 - `c_checkpointBotValidAbilities`
 
 There is no multi-bot rendering path.
@@ -117,9 +117,10 @@ The renderer currently emits these relevant globals:
 - `start`
 - `c_checkpointVectors`
 - `c_levelData`
+- `c_checkpointSizes`
 - `c_checkpointsLiquid`
 - `c_checkpointTimeLimits`
-- `c_checkpointHeightGoals`
+- `c_heightGoals`
 - `c_checkpointMinimumSpeeds`
 - `c_checkpointDisableAbilities`
 - `c_checkpointTouchOrbLocations`
@@ -129,9 +130,8 @@ The renderer currently emits these relevant globals:
 - `c_checkpointAbilityOrbSizes`
 - `c_checkpointLavaLocations`
 - `c_checkpointLavaSizes`
-- `c_checkpointBotLocation`
+- `c_botLocation`
 - `c_checkpointBotValidAbilities`
-- `c_checkpointSizes`
 - `c_checkpointImpulseLocations`
 - `c_checkpointImpulseDirections`
 - `c_checkpointImpulseSpeeds`

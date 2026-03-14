@@ -69,7 +69,7 @@ export function renderMomentumWorkshop(model: MomentumMapModel): string {
       )};`
     );
     lines.push(
-      `\tGlobal.c_checkpointHeightGoals[${levelIndex}] = ${renderConfigSlots(level.checkpointConfigs, (config) =>
+      `\tGlobal.c_heightGoals[${levelIndex}] = ${renderConfigSlots(level.checkpointConfigs, (config) =>
         config.heightGoal !== null ? formatNumber(config.heightGoal) : null
       )};`
     );
@@ -145,7 +145,7 @@ export function renderMomentumWorkshop(model: MomentumMapModel): string {
       )};`
     );
     lines.push(
-      `\tGlobal.c_checkpointBotLocation[${levelIndex}] = ${renderConfigSlots(level.checkpointConfigs, (config) =>
+      `\tGlobal.c_botLocation[${levelIndex}] = ${renderConfigSlots(level.checkpointConfigs, (config) =>
         config.bot ? renderVector(requireCompleteDraftVec3(config.bot.position, `Level ${levelIndex + 1} bot position`)) : null
       )};`
     );
@@ -195,13 +195,8 @@ export function renderMomentumWorkshop(model: MomentumMapModel): string {
     );
     lines.push(
       `\tGlobal.c_checkpointPortals[${levelIndex}] = ${renderConfigSlots(level.checkpointConfigs, (config) =>
-        config.portals
-          ? `Array(${config.portals
-              .map(
-                (portal, portalIndex) =>
-                  `Array(${renderVector(requireCompleteDraftVec3(portal.entry, `Level ${levelIndex + 1} portal ${portalIndex + 1} entry position`))}, ${renderVector(requireCompleteDraftVec3(portal.exit, `Level ${levelIndex + 1} portal ${portalIndex + 1} exit position`))})`
-              )
-              .join(', ')})`
+        config.portal
+          ? `Array(${renderVector(requireCompleteDraftVec3(config.portal.entry, `Level ${levelIndex + 1} portal entry position`))}, ${renderVector(requireCompleteDraftVec3(config.portal.exit, `Level ${levelIndex + 1} portal exit position`))})`
           : null
       )};`
     );

@@ -17,6 +17,20 @@ import { ParseError } from '@/shared/errors/AppError';
 import { getDefaultLevelColor, getDefaultLevelName } from '@/shared/workshop/colors';
 import { extractActionsBlock, extractAssignment, parseWorkshopValue } from '@/shared/workshop/workshopValues';
 
+function collectIndexedAssignmentsWithAliases(actionsBlock: string, ...prefixes: string[]): Map<number, string> {
+  const assignments = new Map<number, string>();
+
+  prefixes.forEach((prefix) => {
+    collectIndexedAssignments(actionsBlock, prefix).forEach((expression, levelKey) => {
+      if (!assignments.has(levelKey)) {
+        assignments.set(levelKey, expression);
+      }
+    });
+  });
+
+  return assignments;
+}
+
 export function parseMomentumWorkshop(input: string): MomentumMapModel {
   const actionsBlock = extractActionsBlock(input);
   const start = parseWorkshopValue(extractAssignment(actionsBlock, 'Global.start'));
@@ -31,7 +45,11 @@ export function parseMomentumWorkshop(input: string): MomentumMapModel {
   );
   const liquidAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointsLiquid');
   const timeLimitAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointTimeLimits');
-  const heightGoalAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointHeightGoals');
+  const heightGoalAssignments = collectIndexedAssignmentsWithAliases(
+    actionsBlock,
+    'Global.c_heightGoals',
+    'Global.c_checkpointHeightGoals'
+  );
   const minimumSpeedAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointMinimumSpeeds');
   const disableAbilityAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointDisableAbilities');
   const touchLocationAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointTouchOrbLocations');
@@ -41,7 +59,11 @@ export function parseMomentumWorkshop(input: string): MomentumMapModel {
   const abilitySizeAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointAbilityOrbSizes');
   const lavaLocationAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointLavaLocations');
   const lavaSizeAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointLavaSizes');
-  const botLocationAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointBotLocation');
+  const botLocationAssignments = collectIndexedAssignmentsWithAliases(
+    actionsBlock,
+    'Global.c_botLocation',
+    'Global.c_checkpointBotLocation'
+  );
   const botAbilityAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointBotValidAbilities');
   const impulseLocationAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointImpulseLocations');
   const impulseDirectionAssignments = collectIndexedAssignments(actionsBlock, 'Global.c_checkpointImpulseDirections');

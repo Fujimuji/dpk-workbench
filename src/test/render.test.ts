@@ -50,7 +50,7 @@ describe('renderMomentumWorkshop', () => {
     expect(output).toContain('Global.c_checkpointsLiquid[0] = Array(True);');
     expect(output).toContain('Global.c_checkpointTimeLimits[0] = Array(3.5);');
     expect(output).toContain('Global.c_checkpointMinimumSpeeds[0] = Array(7);');
-    expect(output).toContain('Global.c_checkpointHeightGoals[0] = Array(9);');
+    expect(output).toContain('Global.c_heightGoals[0] = Array(9);');
   });
 
   it('renders touch orb locations and size arrays', () => {
@@ -93,12 +93,10 @@ describe('renderMomentumWorkshop', () => {
                   speed: 30
                 }
               ],
-              portals: [
-                {
-                  entry: { x: 6, y: 7, z: 8 },
-                  exit: { x: 9, y: 10, z: 11 }
-                }
-              ]
+              portal: {
+                entry: { x: 6, y: 7, z: 8 },
+                exit: { x: 9, y: 10, z: 11 }
+              }
             })
           ]
         }
@@ -112,7 +110,7 @@ describe('renderMomentumWorkshop', () => {
     );
     expect(output).toContain('Global.c_checkpointImpulseSpeeds[0] = Array(Array(Array(10, 20), 30));');
     expect(output).toContain(
-      'Global.c_checkpointPortals[0] = Array(Array(Array(Vector(6, 7, 8), Vector(9, 10, 11))));'
+      'Global.c_checkpointPortals[0] = Array(Array(Vector(6, 7, 8), Vector(9, 10, 11)));'
     );
   });
 

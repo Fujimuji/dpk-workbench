@@ -100,14 +100,16 @@ export function createSocketActionResult(
   }
 
   if (socket === 'portal') {
-    const nextIndex = config?.portals?.length ?? 0;
-    const nextCheckpoint = map.levels[node.levelIndex]?.checkpoints[node.checkpointIndex + 1];
+    if (config?.portal) {
+      return null;
+    }
+
     return {
       nextMap: addPortal(map, node.levelIndex, node.checkpointIndex, {
         entry: createEmptyDraftVec3(),
         exit: createEmptyDraftVec3()
       }),
-      nextSelection: { kind: 'portal', levelIndex: node.levelIndex, checkpointIndex: node.checkpointIndex, portalIndex: nextIndex }
+      nextSelection: { kind: 'portal', levelIndex: node.levelIndex, checkpointIndex: node.checkpointIndex, portalIndex: 0 }
     };
   }
 

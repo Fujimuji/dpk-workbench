@@ -181,7 +181,7 @@ export function appendCheckpointChildren({
     if (entry.kind === 'portal') {
       const accent = getEntityAccent('portal');
       const childWarnings = getWarningsForNode(warnings, 'portal', levelIndex, checkpointNumber, entry.portalIndex);
-      const label = `Portal ${entry.portalIndex + 1}`;
+      const label = 'Portal';
       const node = createNode(
         {
           id: entry.id,

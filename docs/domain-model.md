@@ -83,7 +83,7 @@ Checkpoint positions may be incomplete in-session while the user is drafting, bu
   - `lava`
   - `bot`
   - `impulses`
-  - `portals`
+  - `portal`
 
 Represents editable gameplay config for one active checkpoint slot.
 
@@ -202,8 +202,8 @@ These groups only affect canvas presentation. They never change canonical PM or 
 - Draft-authored checkpoint/entity positions may be incomplete in-session, but render and Hax conversion stay blocked until those positions are complete.
 - Nullable PM fields use `null`, never sentinel numbers.
 - A checkpoint may have many touch/ability/lava orbs, but only one bot.
-- A checkpoint may have many impulses and many portal pairs.
-- PM impulses and portals align to active checkpoint slots only, never to finish checkpoints.
+- A checkpoint may have many impulses and at most one portal pair.
+- PM impulses and portal pairs align to active checkpoint slots only, never to finish checkpoints.
 - Warnings are not part of the canonical model; they are session-only Hax conversion notes.
 - Hax mission ordering, mission prime products, `Connections`, and `GoBackCP` are renderer/service responsibilities, not direct UI-authored raw state.
 - Hax mission UI defaults to unused mission ids; duplicate mission ids are not offered through the editor because the Hax prime-product encoding cannot represent duplicates safely.

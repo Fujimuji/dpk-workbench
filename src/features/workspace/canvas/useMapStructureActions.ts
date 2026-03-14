@@ -437,7 +437,7 @@ export function useMapStructureActions({
       } else if (node.kind === 'impulse' && node.selection.kind === 'impulse') {
         nextMap = removeImpulse(nextMap, node.levelIndex, node.checkpointIndex, node.selection.impulseIndex);
       } else if (node.kind === 'portal' && node.selection.kind === 'portal') {
-        nextMap = removePortal(nextMap, node.levelIndex, node.checkpointIndex, node.selection.portalIndex);
+        nextMap = removePortal(nextMap, node.levelIndex, node.checkpointIndex);
       } else {
         return;
       }
@@ -671,7 +671,7 @@ export function useMapStructureActions({
       } else if (node.kind === 'impulse' && node.selection.kind === 'impulse') {
         nextMap = removeImpulse(nextMap, node.levelIndex, node.checkpointIndex, node.selection.impulseIndex);
       } else if (node.kind === 'portal' && node.selection.kind === 'portal') {
-        nextMap = removePortal(nextMap, node.levelIndex, node.checkpointIndex, node.selection.portalIndex);
+        nextMap = removePortal(nextMap, node.levelIndex, node.checkpointIndex);
       }
 
       dropReadNoteIds([node.id]);

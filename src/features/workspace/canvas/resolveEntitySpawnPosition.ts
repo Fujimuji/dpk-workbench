@@ -37,7 +37,7 @@ function getSpawnPresentation(
     case 'impulse':
       return getDefaultNodeDimensions('impulse', 'Impulse 1', 'Speed 10');
     case 'portal':
-      return getDefaultNodeDimensions('portal', 'Portal 1', 'Entry + Exit');
+      return getDefaultNodeDimensions('portal', 'Portal', 'Entry + Exit');
   }
 }
 

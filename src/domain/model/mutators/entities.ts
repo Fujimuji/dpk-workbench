@@ -221,7 +221,7 @@ export function addPortal(
 ): MomentumMapModel {
   return updateCheckpointConfigEntry(map, levelIndex, checkpointIndex, (config) => ({
     ...config,
-    portals: [...(config.portals ?? []), portal]
+    portal
   }));
 }
 
@@ -229,26 +229,31 @@ export function updatePortal(
   map: MomentumMapModel,
   levelIndex: number,
   checkpointIndex: number,
-  portalIndex: number,
   patch: Partial<PortalPair>
 ): MomentumMapModel {
-  return updateCheckpointConfigEntry(map, levelIndex, checkpointIndex, (config) => ({
-    ...config,
-    portals: updateOrbList(config.portals, (items) =>
-      items.map((portal, index) => (index === portalIndex ? { ...portal, ...patch } : portal))
-    )
-  }));
+  return updateCheckpointConfigEntry(map, levelIndex, checkpointIndex, (config) => {
+    if (!config.portal) {
+      return config;
+    }
+
+    return {
+      ...config,
+      portal: {
+        ...config.portal,
+        ...patch
+      }
+    };
+  });
 }
 
 export function removePortal(
   map: MomentumMapModel,
   levelIndex: number,
-  checkpointIndex: number,
-  portalIndex: number
+  checkpointIndex: number
 ): MomentumMapModel {
   return updateCheckpointConfigEntry(map, levelIndex, checkpointIndex, (config) => ({
     ...config,
-    portals: updateOrbList(config.portals, (items) => items.filter((_, index) => index !== portalIndex))
+    portal: null
   }));
 }
 

@@ -32,7 +32,7 @@ describe('parseMomentumWorkshop', () => {
     expect(model.levels[2].checkpointConfigs).toHaveLength(1);
   });
 
-  it('imports checkpoint sizes, impulses, portals, and direction aliases', () => {
+  it('imports checkpoint sizes, impulses, single portals, and direction aliases', () => {
     const model = parseMomentumWorkshop(MOMENTUM_EXAMPLE_INPUT);
 
     expect(model.levels[0].checkpoints.map((entry) => entry.radius)).toEqual([2, 2, 2.7]);
@@ -55,18 +55,12 @@ describe('parseMomentumWorkshop', () => {
         speed: 18
       }
     ]);
-    expect(model.levels[0].checkpointConfigs[1].portals).toEqual([
-      {
-        entry: { x: 53.9, y: 10, z: 20.7 },
-        exit: { x: 50.239, y: 12.502, z: 2.673 }
-      },
-      {
-        entry: { x: 53.9, y: 10, z: 20.7 },
-        exit: { x: 50.239, y: 12.502, z: 2.673 }
-      }
-    ]);
+    expect(model.levels[0].checkpointConfigs[1].portal).toEqual({
+      entry: { x: 53.9, y: 10, z: 20.7 },
+      exit: { x: 50.239, y: 12.502, z: 2.673 }
+    });
     expect(model.levels[2].checkpointConfigs[0].impulses).toBeNull();
-    expect(model.levels[2].checkpointConfigs[0].portals).toBeNull();
+    expect(model.levels[2].checkpointConfigs[0].portal).toBeNull();
   });
 
   it('imports PM-only checkpoint settings', () => {
@@ -140,6 +134,20 @@ describe('parseMomentumWorkshop', () => {
     ]);
   });
 
+  it('collapses legacy multi-portal PM slots to the first portal pair', () => {
+    const model = parseMomentumWorkshop(`actions{
+      Global.start = Vector(0, 0, 0);
+      Global.c_levelData[0] = Array(Custom String("Solo"), Color(Blue));
+      Global.c_checkpointVectors[0] = Array(Vector(1, 2, 3), Vector(4, 5, 6));
+      Global.c_checkpointPortals[0] = Array(Array(Array(Vector(7, 8, 9), Vector(10, 11, 12)), Array(Vector(13, 14, 15), Vector(16, 17, 18))));
+    }`);
+
+    expect(model.levels[0].checkpointConfigs[0].portal).toEqual({
+      entry: { x: 7, y: 8, z: 9 },
+      exit: { x: 10, y: 11, z: 12 }
+    });
+  });
+
   it('defaults checkpoint sizes to 2 when c_checkpointSizes is missing', () => {
     const model = parseMomentumWorkshop(`actions{
       Global.start = Vector(0, 0, 0);
@@ -158,7 +166,7 @@ describe('parseMomentumWorkshop', () => {
       Global.start = Vector(0, 0, 0);
       Global.c_levelData[0] = Array(Custom String("Clamp"), Color(Green));
       Global.c_checkpointVectors[0] = Array(Vector(0, 0, 0), Vector(1, 1, 1));
-      Global.c_checkpointHeightGoals[0] = Array(-4);
+      Global.c_heightGoals[0] = Array(-4);
       Global.c_checkpointMinimumSpeeds[0] = Array(-2);
     }`);
 

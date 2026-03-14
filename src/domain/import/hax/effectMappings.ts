@@ -27,7 +27,7 @@ export function createEmptyCheckpointConfig(prime: number | null): CheckpointCon
     lava: null,
     bot: null,
     impulses: null,
-    portals: null
+    portal: null
   };
 }
 
@@ -203,13 +203,13 @@ export function convertCheckpointConfig(
 
   const portalPairCount = Math.min(portalEntries.length, portalExits.length);
   if (portalPairCount > 0) {
-    config.portals = Array.from({ length: portalPairCount }, (_, pairIndex) => ({
-      entry: portalEntries[pairIndex]!.position,
-      exit: portalExits[pairIndex]!.position
-    }));
+    config.portal = {
+      entry: portalEntries[0]!.position,
+      exit: portalExits[0]!.position
+    };
   }
 
-  if (portalEntries.length !== portalExits.length) {
+  if ((portalEntries.length > 0 || portalExits.length > 0) && (portalEntries.length !== 1 || portalExits.length !== 1)) {
     unsupportedEffectNames.push('portal');
   }
 

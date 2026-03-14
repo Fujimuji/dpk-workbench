@@ -1,5 +1,5 @@
 import type { CheckpointConfig } from '@/domain/model/types';
-import { isArrayValue, normalizePortalPairList } from '@/domain/import/pm/normalizers';
+import { isArrayValue, normalizePortalSlot } from '@/domain/import/pm/normalizers';
 import { readParsedIndexedValue } from '@/domain/import/pm/readers/assignments';
 import { ParseError } from '@/shared/errors/AppError';
 
@@ -20,11 +20,10 @@ export function readPortals(
   for (let index = 0; index < checkpointConfigs.length; index += 1) {
     const slot = parsed[index];
     if (slot === null || slot === false || slot === undefined) {
-      checkpointConfigs[index].portals = null;
+      checkpointConfigs[index].portal = null;
       continue;
     }
 
-    const portals = normalizePortalPairList(slot, `Global.c_checkpointPortals[${levelKey}][${index}]`);
-    checkpointConfigs[index].portals = portals.length > 0 ? portals : null;
+    checkpointConfigs[index].portal = normalizePortalSlot(slot, `Global.c_checkpointPortals[${levelKey}][${index}]`);
   }
 }

@@ -126,25 +126,25 @@ export function CanvasNodeEditorChildrenTab({
           <span>{formatNumber(impulse.speed)}</span>
         </button>
       ))}
-      {(config.portals ?? []).map((_, portalIndex) => (
+      {config.portal ? (
         <button
           className="canvas-node-child-chip"
-          key={`portal-${portalIndex}`}
+          key="portal-0"
           onClick={() =>
             onSelectNodeBySelection({
               kind: 'portal',
               levelIndex: node.levelIndex!,
               checkpointIndex: node.checkpointIndex!,
-              portalIndex
+              portalIndex: 0
             })
           }
           type="button"
         >
           <DoorOpen aria-hidden="true" className="button-icon" />
-          Portal {portalIndex + 1}
+          Portal
           <span>pair</span>
         </button>
-      ))}
+      ) : null}
     </div>
   );
 }

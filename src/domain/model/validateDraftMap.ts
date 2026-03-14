@@ -83,24 +83,22 @@ export function validateDraftMap(map: MomentumMapModel | null): RenderReadiness 
           );
         }
       });
-      config.portals?.forEach((portal, portalIndex) => {
-        if (!isCompleteDraftVec3(portal.entry)) {
-          blockingReasons.push(
-            formatIncompleteDraftVec3Message(
-              `Level ${levelIndex + 1} checkpoint ${checkpointIndex + 1} Portal ${portalIndex + 1} Entry`,
-              portal.entry
-            )
-          );
-        }
-        if (!isCompleteDraftVec3(portal.exit)) {
-          blockingReasons.push(
-            formatIncompleteDraftVec3Message(
-              `Level ${levelIndex + 1} checkpoint ${checkpointIndex + 1} Portal ${portalIndex + 1} Exit`,
-              portal.exit
-            )
-          );
-        }
-      });
+      if (config.portal && !isCompleteDraftVec3(config.portal.entry)) {
+        blockingReasons.push(
+          formatIncompleteDraftVec3Message(
+            `Level ${levelIndex + 1} checkpoint ${checkpointIndex + 1} Portal Entry`,
+            config.portal.entry
+          )
+        );
+      }
+      if (config.portal && !isCompleteDraftVec3(config.portal.exit)) {
+        blockingReasons.push(
+          formatIncompleteDraftVec3Message(
+            `Level ${levelIndex + 1} checkpoint ${checkpointIndex + 1} Portal Exit`,
+            config.portal.exit
+          )
+        );
+      }
     });
   });
 

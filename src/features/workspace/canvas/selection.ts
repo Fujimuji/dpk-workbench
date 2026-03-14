@@ -84,7 +84,7 @@ export function getSelectionPath(selection: EditorSelection | null): string {
     case 'impulse':
       return `Impulse ${selection.impulseIndex + 1}`;
     case 'portal':
-      return `Portal ${selection.portalIndex + 1}`;
+      return 'Portal';
     case 'haxSpawnEffect':
       return `Effect ${selection.effectIndex + 1}`;
     case 'haxEffect':

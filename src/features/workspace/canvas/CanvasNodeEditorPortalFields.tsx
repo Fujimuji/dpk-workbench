@@ -28,9 +28,8 @@ export function CanvasNodeEditorPortalFields({
     return null;
   }
 
-  const portalIndex = node.selection.portalIndex;
   const checkpointData = getCheckpointData(map, node.levelIndex, node.checkpointIndex);
-  const portal = checkpointData?.config?.portals?.[portalIndex];
+  const portal = checkpointData?.config?.portal;
   const [collapsedSections, setCollapsedSections] = useState({
     entry: false,
     exit: false
@@ -49,7 +48,7 @@ export function CanvasNodeEditorPortalFields({
         <DraftPositionField
           label="Portal Entry"
           onChange={(nextValue) =>
-            onMapChange(updatePortal(map, node.levelIndex!, node.checkpointIndex!, portalIndex, { entry: nextValue }))
+            onMapChange(updatePortal(map, node.levelIndex!, node.checkpointIndex!, { entry: nextValue }))
           }
           value={portal.entry}
         />
@@ -62,14 +61,14 @@ export function CanvasNodeEditorPortalFields({
         <DraftPositionField
           label="Portal Exit"
           onChange={(nextValue) =>
-            onMapChange(updatePortal(map, node.levelIndex!, node.checkpointIndex!, portalIndex, { exit: nextValue }))
+            onMapChange(updatePortal(map, node.levelIndex!, node.checkpointIndex!, { exit: nextValue }))
           }
           value={portal.exit}
         />
       </CanvasNodeEditorDisclosureSection>
       <CanvasNodeEditorEntityActions
         onRemove={() => {
-          onMapChange(removePortal(map, node.levelIndex!, node.checkpointIndex!, portalIndex));
+          onMapChange(removePortal(map, node.levelIndex!, node.checkpointIndex!));
           onReturnToCheckpoint(node.levelIndex!, node.checkpointIndex!);
         }}
         onReturnToCheckpoint={() => onReturnToCheckpoint(node.levelIndex!, node.checkpointIndex!)}

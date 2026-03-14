@@ -45,21 +45,26 @@ export const MOMENTUM_EXAMPLE_INPUT = `variables
 \t\t2: start
 \t\t3: c_checkpointVectors
 \t\t5: c_levelData
-\t\t6: c_checkpointsLiquid
-\t\t7: c_checkpointTimeLimits
-\t\t8: c_checkpointHeightGoals
-\t\t9: c_checkpointMinimumSpeeds
-\t\t10: c_checkpointDisableAbilities
-\t\t11: c_checkpointTouchOrbLocations
-\t\t12: c_checkpointTouchOrbSizes
-\t\t13: c_checkpointAbilityOrbLocations
-\t\t14: c_checkpointAbilityOrbAbilities
-\t\t15: c_checkpointAbilityOrbSizes
-\t\t16: c_checkpointLavaLocations
-\t\t17: c_checkpointLavaSizes
-\t\t18: c_checkpointBotLocation
-\t\t19: c_checkpointBotValidAbilities
-\t\t20: ctrl
+\t\t6: c_checkpointSizes
+\t\t7: c_checkpointsLiquid
+\t\t8: c_checkpointTimeLimits
+\t\t9: c_heightGoals
+\t\t10: c_checkpointMinimumSpeeds
+\t\t11: c_checkpointDisableAbilities
+\t\t12: c_checkpointTouchOrbLocations
+\t\t13: c_checkpointTouchOrbSizes
+\t\t14: c_checkpointAbilityOrbLocations
+\t\t15: c_checkpointAbilityOrbAbilities
+\t\t16: c_checkpointAbilityOrbSizes
+\t\t17: c_checkpointLavaLocations
+\t\t18: c_checkpointLavaSizes
+\t\t19: c_botLocation
+\t\t20: c_checkpointBotValidAbilities
+\t\t21: c_checkpointImpulseLocations
+\t\t22: c_checkpointImpulseDirections
+\t\t23: c_checkpointImpulseSpeeds
+\t\t24: c_checkpointPortals
+\t\t25: ctrl
 
 \tplayer:
 \t\t5: isInLevel
@@ -73,7 +78,7 @@ actions
 \tGlobal.c_checkpointSizes[0] = Array(2, 2, 2.7);
 \tGlobal.c_checkpointsLiquid[0] = Array(Null, True);
 \tGlobal.c_checkpointTimeLimits[0] = Null;
-\tGlobal.c_checkpointHeightGoals[0] = Null;
+\tGlobal.c_heightGoals[0] = Null;
 \tGlobal.c_checkpointDisableAbilities[0] = Null;
 \tGlobal.c_checkpointTouchOrbLocations[0] = Array(Array(Vector(53.900, 10, 20.700)), Array(Vector(51.040, 7, -8.800)));
 \tGlobal.c_checkpointTouchOrbSizes[0] = Array(0.500, 1);
@@ -82,19 +87,19 @@ actions
 \tGlobal.c_checkpointAbilityOrbSizes[0] = Null;
 \tGlobal.c_checkpointLavaLocations[0] = Null;
 \tGlobal.c_checkpointLavaSizes[0] = Null;
-\tGlobal.c_checkpointBotLocation[0] = Null;
+\tGlobal.c_botLocation[0] = Null;
 \tGlobal.c_checkpointBotValidAbilities[0] = Null;
 \tGlobal.c_checkpointMinimumSpeeds[0] = Array(Null, 6);
 \tGlobal.c_checkpointImpulseLocations[0] = Array(Array(Vector(43.440, 4.880, 14.360)), Array(Vector(50.110, 7.890, 10.200)));
 \tGlobal.c_checkpointImpulseDirections[0] = Array(Array(Up, Vector(0, -1, 1)), Array(Vector(0, 1, 0)), Null);
 \tGlobal.c_checkpointImpulseSpeeds[0] = Array(Array(16, 25), Array(18));
-\tGlobal.c_checkpointPortals[0] = Array(Null, Array(Array(Vector(53.900, 10, 20.700), Vector(50.239, 12.502, 2.673)), Array(Vector(53.900, 10, 20.700), Vector(50.239, 12.502, 2.673))), Null);
+\tGlobal.c_checkpointPortals[0] = Array(Null, Array(Vector(53.900, 10, 20.700), Vector(50.239, 12.502, 2.673)), Null);
 \tGlobal.c_levelData[1] = Array(Custom String("Level 2"), Color(Purple));
 \tGlobal.c_checkpointVectors[1] = Array(Vector(40.349, 3.719, 34.528), Vector(40.490, 10.860, 20.549), Vector(50.199, 5.656,
 \t\t-25.572));
 \tGlobal.c_checkpointsLiquid[1] = Null;
 \tGlobal.c_checkpointTimeLimits[1] = Array(Null, 6);
-\tGlobal.c_checkpointHeightGoals[1] = Array(20);
+\tGlobal.c_heightGoals[1] = Array(20);
 \tGlobal.c_checkpointDisableAbilities[1] = Array(Null, Array(False, True, True));
 \tGlobal.c_checkpointTouchOrbLocations[1] = Null;
 \tGlobal.c_checkpointTouchOrbSizes[1] = Null;
@@ -103,14 +108,14 @@ actions
 \tGlobal.c_checkpointAbilityOrbSizes[1] = Array(Null, Array(1));
 \tGlobal.c_checkpointLavaLocations[1] = Array(Null, Array(Vector(34.460, 4.800, 25.771)));
 \tGlobal.c_checkpointLavaSizes[1] = Array(Null, Array(2));
-\tGlobal.c_checkpointBotLocation[1] = Null;
+\tGlobal.c_botLocation[1] = Null;
 \tGlobal.c_checkpointBotValidAbilities[1] = Null;
 \tGlobal.c_checkpointMinimumSpeeds[1] = Null;
 \tGlobal.c_levelData[2] = Array(Custom String("Level 3"), Color(Orange));
 \tGlobal.c_checkpointVectors[2] = Array(Vector(33.849, 5.794, 41.789), Vector(34.460, 4.800, 25.771));
 \tGlobal.c_checkpointsLiquid[2] = Null;
 \tGlobal.c_checkpointTimeLimits[2] = Null;
-\tGlobal.c_checkpointHeightGoals[2] = Null;
+\tGlobal.c_heightGoals[2] = Null;
 \tGlobal.c_checkpointDisableAbilities[2] = Null;
 \tGlobal.c_checkpointTouchOrbLocations[2] = Null;
 \tGlobal.c_checkpointTouchOrbSizes[2] = Null;
@@ -120,7 +125,7 @@ actions
 \tGlobal.c_checkpointLavaLocations[2] = Null;
 \tGlobal.c_checkpointLavaSizes[2] = Null;
 \tGlobal.c_checkpointMinimumSpeeds[2] = Null;
-\tGlobal.c_checkpointBotLocation[2] = Array(Vector(42.577, 3.837, 31.078));
+\tGlobal.c_botLocation[2] = Array(Vector(42.577, 3.837, 31.078));
 \tGlobal.c_checkpointBotValidAbilities[2] = Array(Array(True, False, True));
 \t"Level Effects"
 \tCreate Effect(Local Player.isInLevel ? Null : Local Player, Ring, Color(Gray), Global.start, 3, Visible To);

@@ -78,7 +78,7 @@ There is intentionally no decorative activity rail.
 - renders `Effects` and `Missions` wrapper nodes under every Hax checkpoint, even when empty
 - renders an `Entities` wrapper node under every non-finish Project Momentum checkpoint, even when empty
 - moves Project Momentum touch orb, ability orb, lava orb, bot, impulse, and portal creation onto the `Entities` wrapper in both the navigator and the scoped canvas inspector
-- renders PM impulses and portals as individual child nodes under `Entities`; portals stay a single paired node rather than split entry/exit children
+- renders PM impulses and the single supported portal pair as individual child nodes under `Entities`; the portal stays one paired node rather than split entry/exit children
 - keeps PM impulse and portal layout simple in v1: no grouping or stack presentation
 - uses paired Hax child nodes for portal entry/exit and zipline start/end editing
 - keeps Hax effect editing in dedicated effect-node inspectors instead of embedding effect controls into checkpoint inspectors
@@ -172,7 +172,7 @@ There is intentionally no decorative activity rail.
 - The top-level scope is presented to users as `Spawn View`; the internal scope kind remains `document`
 - Canvas behavior is format-parity: PM and Hax both use the same drag, scope-drill, context-menu, and bulk-delete interaction model, with format-specific document mutators behind the shared UI
 - New PM impulse nodes default to the checkpoint position with `Up` direction and speed `10`
-- New PM portal nodes default to `entry = checkpoint position` and `exit = next checkpoint position` when available
+- New PM portal nodes default to blank `entry` and `exit` draft positions
 - Hax effect nodes use effect-type accents in both the scoped canvas and navigator to mirror Hax semantics instead of PM child categories
 - Hax mission nodes use human-readable mission names and a segmented `Lock / Time` control in the shared inspector
 

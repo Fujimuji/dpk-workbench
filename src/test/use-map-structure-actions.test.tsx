@@ -220,7 +220,7 @@ describe('useMapStructureActions', () => {
               lava: null,
               bot: null,
               impulses: null,
-              portals: null
+              portal: null
             }
           ]
         }

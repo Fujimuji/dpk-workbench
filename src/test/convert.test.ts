@@ -129,7 +129,7 @@ describe('convertHaxToMomentum', () => {
     expect(result.model.levels[0].checkpointConfigs[0]?.timeLimit).toBe(12.5);
   });
 
-  it('converts paired Hax portals into PM portal pairs without unsupported warnings', () => {
+  it('converts a paired Hax portal into a single PM portal without unsupported warnings', () => {
     const source: HaxSourceData = {
       checkpointPositions: [vector(0), vector(1), vector(2)],
       checkpointPrimes: [11, null, null],
@@ -145,13 +145,36 @@ describe('convertHaxToMomentum', () => {
 
     const result = convertHaxToMomentum(source);
 
-    expect(result.model.levels[0].checkpointConfigs[0].portals).toEqual([
-      {
-        entry: vector(10),
-        exit: vector(11)
-      }
-    ]);
+    expect(result.model.levels[0].checkpointConfigs[0].portal).toEqual({
+      entry: vector(10),
+      exit: vector(11)
+    });
     expect(result.warnings.map((warning) => warning.code)).not.toContain('unsupported_effect_removed');
+  });
+
+  it('keeps only the first Hax portal pair when extra pairs exist on a checkpoint', () => {
+    const source: HaxSourceData = {
+      checkpointPositions: [vector(0), vector(1), vector(2)],
+      checkpointPrimes: [11, null, null],
+      checkpointEffects: [
+        [],
+        [
+          { position: vector(10), radius: 1.1, type: 5, payload: 0 },
+          { position: vector(11), radius: 1.1, type: 6, payload: 0 },
+          { position: vector(12), radius: 1.1, type: 5, payload: 0 },
+          { position: vector(13), radius: 1.1, type: 6, payload: 0 }
+        ],
+        []
+      ]
+    };
+
+    const result = convertHaxToMomentum(source);
+
+    expect(result.model.levels[0].checkpointConfigs[0].portal).toEqual({
+      entry: vector(10),
+      exit: vector(11)
+    });
+    expect(result.warnings.map((warning) => warning.code)).toContain('unsupported_effect_removed');
   });
 
   it('converts Hax impulse bounces and warns on unsupported bounce variants', () => {

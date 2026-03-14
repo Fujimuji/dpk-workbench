@@ -15,7 +15,7 @@ export function readBots(
   }
 
   if (!isArrayValue(parsedLocations)) {
-    throw new ParseError('invalid_syntax', `Global.c_checkpointBotLocation[${levelKey}] must be Null or an Array.`);
+    throw new ParseError('invalid_syntax', `Global.c_botLocation[${levelKey}] must be Null or an Array.`);
   }
 
   const parsedAbilities = readParsedIndexedValue(abilityAssignments, levelKey);
@@ -39,7 +39,7 @@ export function readBots(
     }
 
     if (!isVec3(locationSlot)) {
-      throw new ParseError('invalid_syntax', `Global.c_checkpointBotLocation[${levelKey}][${index}] must be a Vector.`);
+      throw new ParseError('invalid_syntax', `Global.c_botLocation[${levelKey}][${index}] must be a Vector.`);
     }
 
     const validAbilities =

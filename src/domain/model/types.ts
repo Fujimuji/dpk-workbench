@@ -87,7 +87,7 @@ export interface CheckpointConfig {
   lava: LavaOrb[] | null;
   bot: BotConfig | null;
   impulses: ImpulseEffect[] | null;
-  portals: PortalPair[] | null;
+  portal: PortalPair | null;
 }
 
 export interface LevelModel {

@@ -185,7 +185,7 @@ function buildMomentumChildNode(
       nodes.push(buildNodeSummary({
         id: entry.id,
         kind: 'portal',
-        label: `Portal ${entry.portalIndex + 1}`,
+        label: 'Portal',
         sublabel: 'Entry + Exit',
         selection: { kind: 'portal', levelIndex, checkpointIndex, portalIndex: entry.portalIndex },
         levelIndex,

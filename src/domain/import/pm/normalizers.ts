@@ -43,7 +43,7 @@ export function createDefaultCheckpointConfig(): CheckpointConfig {
     lava: null,
     bot: null,
     impulses: null,
-    portals: null
+    portal: null
   };
 }
 
@@ -135,19 +135,29 @@ export function normalizeDirectionList(value: WorkshopValue, label: string): Vec
   return normalizeVectorList(value, label);
 }
 
-export function normalizePortalPairList(value: WorkshopValue, label: string): PortalPair[] {
-  if (!isArrayValue(value)) {
-    throw new ParseError('invalid_syntax', `${label} must contain portal pairs.`);
+export function normalizePortalPair(value: WorkshopValue, label: string): PortalPair {
+  if (!isArrayValue(value) || value.length < 2 || !isVec3(value[0]) || !isVec3(value[1])) {
+    throw new ParseError('invalid_syntax', `${label} must be Array(Vector, Vector).`);
   }
 
-  return value.map((entry, index) => {
-    if (!isArrayValue(entry) || entry.length < 2 || !isVec3(entry[0]) || !isVec3(entry[1])) {
-      throw new ParseError('invalid_syntax', `${label} #${index + 1} must be Array(Vector, Vector).`);
-    }
+  return {
+    entry: value[0],
+    exit: value[1]
+  };
+}
 
-    return {
-      entry: entry[0],
-      exit: entry[1]
-    };
-  });
+export function normalizePortalSlot(value: WorkshopValue, label: string): PortalPair | null {
+  if (!isArrayValue(value)) {
+    throw new ParseError('invalid_syntax', `${label} must contain a portal pair.`);
+  }
+
+  if (value.length === 0) {
+    return null;
+  }
+
+  if (isVec3(value[0])) {
+    return normalizePortalPair(value, label);
+  }
+
+  return normalizePortalPair(value[0], `${label} #1`);
 }

@@ -192,7 +192,7 @@ describe('workspace onboarding helpers', () => {
                 lava: null,
                 bot: null,
                 impulses: null,
-                portals: null
+                portal: null
               }
             ]
           }

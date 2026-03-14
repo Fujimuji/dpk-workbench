@@ -34,8 +34,8 @@ import type {
 } from '@/domain/import/hax/types';
 import type { WorkspaceDocument } from '@/domain/document/types';
 
-export const WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSION = 3;
-const SUPPORTED_WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSIONS = new Set([2, WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSION]);
+export const WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSION = 4;
+const SUPPORTED_WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSIONS = new Set([2, 3, WORKSPACE_SESSION_SNAPSHOT_SCHEMA_VERSION]);
 
 export type WorkspaceSessionSnapshotSource = 'manual-save' | 'autosave';
 
@@ -189,6 +189,7 @@ function isCheckpointConfig(value: unknown): value is CheckpointConfig {
     isNullable(value.lava, (candidate): candidate is LavaOrb[] => isArrayOf(candidate, isLavaOrb)) &&
     isNullable(value.bot, isBotConfig) &&
     isOptionalNullable(value.impulses, (candidate): candidate is ImpulseEffect[] => isArrayOf(candidate, isImpulseEffect)) &&
+    isOptionalNullable(value.portal, isPortalPair) &&
     isOptionalNullable(value.portals, (candidate): candidate is PortalPair[] => isArrayOf(candidate, isPortalPair))
   );
 }

@@ -32,8 +32,8 @@ describe('workspace node id helpers', () => {
     expect(getSelectionNodeId({ kind: 'impulse', levelIndex: 0, checkpointIndex: 2, impulseIndex: 4 })).toBe(
       'level-0-cp-3-impulse-4'
     );
-    expect(getSelectionNodeId({ kind: 'portal', levelIndex: 0, checkpointIndex: 2, portalIndex: 1 })).toBe(
-      'level-0-cp-3-portal-1'
+    expect(getSelectionNodeId({ kind: 'portal', levelIndex: 0, checkpointIndex: 2, portalIndex: 0 })).toBe(
+      'level-0-cp-3-portal-0'
     );
     expect(getSelectionNodeId({ kind: 'haxEffects', levelIndex: 0, checkpointIndex: 2 })).toBe('level-0-cp-3-haxEffects');
     expect(getSelectionNodeId({ kind: 'haxMissions', levelIndex: 0, checkpointIndex: 2 })).toBe('level-0-cp-3-haxMissions');
@@ -77,11 +77,11 @@ describe('workspace node id helpers', () => {
       checkpointIndex: 2,
       impulseIndex: 4
     });
-    expect(parseEditorNodeId('level-0-cp-3-portal-1')).toEqual({
+    expect(parseEditorNodeId('level-0-cp-3-portal-0')).toEqual({
       kind: 'portal',
       levelIndex: 0,
       checkpointIndex: 2,
-      portalIndex: 1
+      portalIndex: 0
     });
     expect(parseEditorNodeId('level-0-cp-3-haxZiplinePair-4-5')).toEqual({
       kind: 'haxPair',
@@ -109,7 +109,7 @@ describe('workspace node id helpers', () => {
     expect(remapEditorNodeId('level-0-cp-1', REMAP)).toBe('level-1-cp-2');
     expect(remapEditorNodeId('level-0-cp-1-momentumEntities', REMAP)).toBe('level-1-cp-2-momentumEntities');
     expect(remapEditorNodeId('level-0-cp-1-impulse-3', REMAP)).toBe('level-1-cp-2-impulse-3');
-    expect(remapEditorNodeId('level-0-cp-1-portal-2', REMAP)).toBe('level-1-cp-2-portal-2');
+    expect(remapEditorNodeId('level-0-cp-1-portal-0', REMAP)).toBe('level-1-cp-2-portal-0');
     expect(remapEditorNodeId('level-0-cp-1-haxEffect-3', REMAP)).toBe('level-1-cp-2-haxEffect-3');
     expect(remapEditorNodeId('level-0-cp-1-haxPortalPair-3-4', REMAP)).toBe('level-1-cp-2-haxPortalPair-3-4');
     expect(remapEditorNodeId('level-0-cp-1-touchStack-0-1', REMAP)).toBe('level-1-cp-2-touchStack-0-1');

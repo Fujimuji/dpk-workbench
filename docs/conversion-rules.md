@@ -74,9 +74,9 @@ Other prime factors are ignored unless a specific effect mapping uses them.
 
 ### `type 5` + `type 6` (`portal entry` + `portal exit`)
 
-- portal entry/exit pairs convert into PM `PortalPair` values
-- converted portals no longer emit `unsupported_effect_removed`
-- unmatched extra portal endpoints still emit an unsupported checkpoint warning
+- one portal entry/exit pair converts into the PM checkpoint `portal` value
+- converted single portals no longer emit `unsupported_effect_removed`
+- extra or unmatched portal endpoints still emit an unsupported checkpoint warning because PM supports only one portal pair per checkpoint
 
 ### `type 11` (`bounce effect`)
 
@@ -126,7 +126,7 @@ When a new editable PM model is created, these start as defaults:
 - `minimumSpeed = null`
 - `heightGoal = null`
 - `impulses = null`
-- `portals = null`
+- `portal = null`
 - checkpoint radius defaults to `2` for non-Hax sources and uses the Hax checkpoint radius when converting a first-class `HaxDocument`
 
 The converter fills PM-specific defaults so the model is fully editable immediately after import.

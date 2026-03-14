@@ -45,7 +45,7 @@ export interface VisibleCheckpointImpulseChildEntry {
 export interface VisibleCheckpointPortalChildEntry {
   id: string;
   kind: 'portal';
-  portalIndex: number;
+  portalIndex: 0;
 }
 
 export type VisibleCheckpointChildEntry =
@@ -232,13 +232,13 @@ export function buildVisibleCheckpointChildren(
     });
   });
 
-  (checkpointConfig.portals ?? []).forEach((_, portalIndex) => {
+  if (checkpointConfig.portal) {
     entries.push({
-      id: `${getCheckpointNodeId(levelIndex, checkpointIndex)}-portal-${portalIndex}`,
+      id: `${getCheckpointNodeId(levelIndex, checkpointIndex)}-portal-0`,
       kind: 'portal',
-      portalIndex
+      portalIndex: 0
     });
-  });
+  }
 
   return entries;
 }

@@ -284,7 +284,7 @@ export function buildNodeContextMenu({
         { id: 'add-lava', label: 'Add Lava Orb', socket: 'lava' },
         { id: 'add-bot', label: 'Add Bot', socket: 'bot', disabled: Boolean(config.bot) },
         { id: 'add-impulse', label: 'Add Impulse', socket: 'impulse' },
-        { id: 'add-portal', label: 'Add Portal', socket: 'portal' }
+        { id: 'add-portal', label: 'Add Portal', socket: 'portal', disabled: Boolean(config.portal) }
       ];
 
       addActions.forEach((action, index) => {

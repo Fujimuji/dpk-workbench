@@ -137,12 +137,16 @@ function normalizeCheckpointConfig(config: Partial<CheckpointConfig> | null | un
             speed: legacyImpulse.segments?.[0]?.speed ?? 10
           };
     }) ?? null;
+  const legacyPortal = (config as Partial<CheckpointConfig> & { portals?: CheckpointConfig['portal'][] | CheckpointConfig['portal'] })?.portals;
+  const normalizedPortal =
+    config?.portal ??
+    (Array.isArray(legacyPortal) ? legacyPortal[0] ?? null : legacyPortal ?? null);
 
   return {
     ...createDefaultCheckpointConfig(),
     ...config,
     impulses: normalizedImpulses,
-    portals: config?.portals ?? null
+    portal: normalizedPortal
   };
 }
 
