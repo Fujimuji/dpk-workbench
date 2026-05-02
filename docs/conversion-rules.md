@@ -20,6 +20,12 @@ The Hax parser also reads the broader documented Hax globals:
 - `Global.TP`
 - `Global.FakeUpperCP`
 
+`Global.AbilityCount` slot handling:
+
+- empty slots may appear as `False`, `0`, `True`, or `Null`
+- enabled slots may appear as a bare `Vector(...)` in older data or `Array(True, Vector(...))` in framework-shaped data
+- Hax rendering normalizes enabled slots to `Array(True, Vector(...))`
+
 The app can also import Project Momentum Workshop source directly through `src/domain/import/pm/parseMomentumWorkshop.ts`. PM import is a permissive subset importer:
 
 - it reads only the PM variables the editor owns

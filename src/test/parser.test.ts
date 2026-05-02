@@ -43,6 +43,22 @@ describe('parseHaxWorkshop', () => {
     expect(parsed.checkpoints[1].effects).toEqual([]);
   });
 
+  it('parses wrapped ability count vectors', () => {
+    const parsed = parseHaxWorkshop(`variables{} actions{
+      Global.CPposition = Array(Vector(0,0,0), Vector(1,1,1));
+      Global.Prime = Array(11, 13);
+      Global.AbilityCount = Array(False, Array(True, Vector(2,7,5)));
+      Global.Effect = Array(False, False);
+    }`);
+
+    expect(parsed.spawn.abilityCount).toBeNull();
+    expect(parsed.checkpoints[0].abilityCount).toEqual({
+      rocketPunch: 2,
+      powerblock: 7,
+      seismicSlam: 5
+    });
+  });
+
   it('fails when a required variable is missing', () => {
     expect(() =>
       parseHaxWorkshop(`actions{ Global.CPposition = Array(Vector(0,0,0), Vector(1,1,1)); Global.Prime = Array(11, 13); }`)

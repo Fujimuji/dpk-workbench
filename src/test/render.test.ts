@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { HAX_EXAMPLE_INPUT } from '../app/examples';
 import { convertHaxToMomentum } from '../domain/import/hax/convertHaxToMomentum';
 import { parseHaxWorkshop } from '../domain/import/hax/parseHaxWorkshop';
+import { renderHaxWorkshop } from '../domain/render/renderHaxWorkshop';
 import { renderMomentumWorkshop } from '../domain/render/renderMomentumWorkshop';
 import { formatNumber, VARIABLE_BLOCK } from '../domain/render/sections';
 import type { MomentumMapModel } from '../domain/model/types';
@@ -141,5 +142,18 @@ describe('renderMomentumWorkshop', () => {
 
     expect(preview).toBe(VARIABLE_BLOCK);
     expect(result.outputText).toContain('Global.c_levelData[0] = Array(Custom String("Level 1"), Color(Aqua));');
+  });
+
+  it('normalizes enabled Hax ability counts to Array(True, Vector(...))', () => {
+    const parsed = parseHaxWorkshop(`variables{} actions{
+      Global.CPposition = Array(Vector(0,0,0), Vector(1,1,1));
+      Global.Prime = Array(11, 13);
+      Global.AbilityCount = Array(False, Vector(2,7,5));
+      Global.Effect = Array(False, False);
+    }`);
+
+    expect(renderHaxWorkshop(parsed)).toContain(
+      'Global.AbilityCount = Array(False, Array(True, Vector(2, 7, 5)));'
+    );
   });
 });

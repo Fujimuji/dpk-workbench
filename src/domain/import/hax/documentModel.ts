@@ -120,39 +120,57 @@ function encodeCheckpointMission(value: HaxMission[]): true | number[] {
   return value.length === 0 ? true : encodeMissionData(value);
 }
 
+function isVec3Value(value: unknown): value is Vec3 {
+  return (
+    Boolean(value) &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    typeof (value as Vec3).x === 'number' &&
+    typeof (value as Vec3).y === 'number' &&
+    typeof (value as Vec3).z === 'number'
+  );
+}
+
 function decodeAbilityCount(value: unknown): HaxCheckpoint['abilityCount'] {
   if (value === false || value === true || value === null || value === 0) {
     return null;
   }
 
-  if (
-    !value ||
-    typeof value !== 'object' ||
-    Array.isArray(value) ||
-    typeof (value as Vec3).x !== 'number' ||
-    typeof (value as Vec3).y !== 'number' ||
-    typeof (value as Vec3).z !== 'number'
-  ) {
-    throw new ParseError('invalid_checkpoint_shape', 'Global.AbilityCount entries must be empty or Vector values.');
+  const vectorValue = Array.isArray(value)
+    ? value.length === 2 && value[0] === true && isVec3Value(value[1])
+      ? value[1]
+      : null
+    : isVec3Value(value)
+      ? value
+      : null;
+
+  if (!vectorValue) {
+    throw new ParseError(
+      'invalid_checkpoint_shape',
+      'Global.AbilityCount entries must be empty, Vector values, or Array(True, Vector(...)).'
+    );
   }
 
   return {
-    rocketPunch: (value as Vec3).x,
-    powerblock: (value as Vec3).y,
-    seismicSlam: (value as Vec3).z
+    rocketPunch: vectorValue.x,
+    powerblock: vectorValue.y,
+    seismicSlam: vectorValue.z
   };
 }
 
-function encodeAbilityCount(value: HaxCheckpoint['abilityCount']): false | Vec3 {
+function encodeAbilityCount(value: HaxCheckpoint['abilityCount']): false | [true, Vec3] {
   if (!value) {
     return false;
   }
 
-  return {
-    x: value.rocketPunch,
-    y: value.powerblock,
-    z: value.seismicSlam
-  };
+  return [
+    true,
+    {
+      x: value.rocketPunch,
+      y: value.powerblock,
+      z: value.seismicSlam
+    }
+  ];
 }
 
 function decodeTeleportSettings(
@@ -251,7 +269,7 @@ export function createHaxCheckpoint(
 }
 
 export interface HaxWireData extends HaxSourceData {
-  abilityCounts: Array<false | Vec3>;
+  abilityCounts: Array<false | [true, Vec3]>;
   connections: Array<number | false>;
   fakeUpperCheckpointStates: boolean[];
   hiddenTeleportTimeTrial: Array<false | Vec3>;

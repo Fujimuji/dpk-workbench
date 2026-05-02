@@ -51,6 +51,14 @@ function renderLooseValue(value: false | true | number | number[] | HaxEffect[] 
   return renderVector(value);
 }
 
+function renderAbilityCount(value: false | [true, { x: number; y: number; z: number }]): string {
+  if (value === false) {
+    return 'False';
+  }
+
+  return `Array(True, ${renderVector(value[1])})`;
+}
+
 function renderEffectPayload(payload: number | Vec3Payload): string {
   if (typeof payload === 'number') {
     return formatNumber(payload);
@@ -83,7 +91,7 @@ export function renderHaxWorkshop(document: HaxDocument): string {
   lines.push(
     `\tGlobal.Prime = ${renderSlotArray(wire.checkpointPrimes.map((prime) => renderNullableNumber(prime)))};`
   );
-  lines.push(`\tGlobal.AbilityCount = ${renderSlotArray(wire.abilityCounts.map(renderLooseValue))};`);
+  lines.push(`\tGlobal.AbilityCount = ${renderSlotArray(wire.abilityCounts.map(renderAbilityCount))};`);
   lines.push(
     `\tGlobal.HiddenCP_TpRad_TT = ${renderSlotArray(wire.hiddenTeleportTimeTrial.map(renderLooseValue))};`
   );
